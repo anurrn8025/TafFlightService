@@ -7,6 +7,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
@@ -22,6 +25,7 @@ public class FlightController {
     }
 
     //Retrieve all available flights
+    @CrossOrigin(origins = "*")
     @GetMapping("/flights")
     public List<FlightsDTO> getAllFlights(){
         return flightServiceImpl.getAllFlights();
@@ -31,6 +35,13 @@ public class FlightController {
     @GetMapping("/flights/{flightId}")
     public FlightsDTO getSingleFlight(@PathVariable("flightId")Long flightId){
         return flightServiceImpl.getSingleFlight(flightId);
+    }
+
+    //Retrieve single flight details
+    @CrossOrigin(origins = "*")
+    @GetMapping("/flights/{departure}/{arrival}")
+    public FlightsDTO getFlightID(@PathVariable("departure")String departure,@PathVariable("arrival")String arrival){
+        return flightServiceImpl.getFlightID(departure,arrival);
     }
 
 

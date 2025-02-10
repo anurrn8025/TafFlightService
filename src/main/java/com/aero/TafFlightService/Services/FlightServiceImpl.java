@@ -56,4 +56,10 @@ public class FlightServiceImpl implements FlightService {
         String resp = "Flight deleted successfully!";
         return resp;
     }
+
+    @Override
+    public FlightsDTO getFlightID(String departure, String arrival) {
+        System.out.println("departure = "+ departure + " and arrival :" + arrival);
+        return restTemplate.getForObject(dataStoreUrl+ "/" +departure+ "/" +arrival, FlightsDTO.class);
+    }
 }
